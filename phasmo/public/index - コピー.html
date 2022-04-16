@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>ファズモ ジャーナル</title>
+		<link href="style.css" rel="stylesheet" type="text/css">
+    <!-- google Icon用CSS -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<meta name="keywords" content="Phasmophobia,ファズモフォビア,ジャーナル,ホラゲ">
+		<meta name="description" content="ジャーナル機能です">
+		<link rel="shortcut icon" type="image/x-icon" href="img/character/c_kokkoro.png">
+		<meta property="og:title"content="ファズモ ジャーナル"/>
+		<meta property="og:description" content="ジャーナル機能"/>
+		<meta property="og:type"content="website"/>
+		<meta property="og:url"content="https://sss-hp.net"/>
+		<meta property="og:image"content="https://sss-hp.net/img/card.png"/>
+		<meta name="twitter:site" content="@SSS_Twitch_">
+		<meta name="twitter:card" content="summary">
+		<link href="https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c" rel="stylesheet">
+		<meta name="google-site-verification" content="Ur-G9t2L97pTqZqrpzAsAVVFA-DBrlknQTSpJ2usj8o" />
+		<script src=""></script>
+
+		<style type="text/css">
+
+table{
+	background-color:#ffffff;
+	border-collapse: collapse;
+}
+
+img{
+	width: 100%;
+	max-width: 700px;
+}
+
+input[type="button"]{
+	margin: 4px auto;
+  border-radius : 5%;          /* 角丸       */
+	font-size: 120%;
+  text-align    : center;      /* 文字位置   */
+  cursor        : pointer;     /* カーソル   */
+  padding       : 4px 12px;   /* 余白       */
+  background    : #00007f;     /* 背景色     */
+  color         : #ffffff;     /* 文字色     */
+  line-height   : 1em;         /* 1行の高さ  */
+  transition    : .3s;         /* なめらか変化 */
+  border        : 2px solid #00007f;    /* 枠の指定 */
+}
+
+input[type="button"]:hover {
+  color         : #00007f;     /* 背景色     */
+  background    : #ffffff;     /* 文字色     */
+}
+
+input[type="checkbox"]{
+	-moz-transform:scale(1.3);
+	-webkit-transform:scale(1.3);
+	transform:scale(1.3);
+}
+
+hr{
+	border: none;
+}
+
+.css00{
+	width:200px;
+}
+
+.css01{
+	width:140px;
+}
+
+.css02{
+	width:300px;
+}
+
+.css03{
+	text-align:center;
+	margin:20px auto;
+}
+
+.css04{
+	display:inline;
+}
+
+.css05{
+	text-align: center;
+	margin: 20px auto;
+}
+
+.css06{
+	width: 250px;
+}
+
+.css07{
+	width: 100%;
+	max-width: 200px;
+}
+
+#blue{
+	background-color:#00bfff;
+}
+
+#black{
+	background-color:#696969;
+}
+		</style>
+
+		<style type="text/css" id="style">
+body{
+	background-color:#808080;
+}
+		</style>
+	</head>
+
+	<body oncontextmenu="return false;">
+		<header>
+      <h3 style="text-align:center">ファズモフォビア ジャーナル(v0.5.0.1)</h3>
+    </header>
+
+		<div class="css03"><label><input type="checkbox" id="CRM">背景クロマキー</label></div>
+
+    <table border="1" style="margin:0px auto;text-align:center">
+    <tr>
+      <td><input type="checkbox" name="EMF" id="EMF"></td>
+      <td class="css00">EMFレベル5</td>
+      <td><input type="checkbox" name="DOT" id="DOT"></td>
+      <td class="css00">D.O.T.S.プロジェクター</td>
+    </tr>
+    <tr>
+      <td><input type="checkbox" name="FIN" id="FIN"></td>
+      <td>指紋</td>
+      <td><input type="checkbox" name="ORB" id="ORB"></td>
+      <td>ゴーストオーブ</td>
+    </tr>
+    <tr>
+      <td><input type="checkbox" name="WRI" id="WRI"></td>
+      <td>ゴーストライティング</td>
+      <td><input type="checkbox" name="SPB" id="SPB"></td>
+      <td>スピリットボックス</td>
+    </tr>
+    <tr>
+      <td><input type="checkbox" name="FRE" id="FRE"></td>
+      <td>氷点下の温度</td>
+      <td>--</td>
+      <td>-------</td>
+    </tr>
+	</table>
+
+    <!--<p id="msg">選択なし</p>-->
+
+    <table border="1" style="margin:20px auto 0px auto" id="table">
+    <tr>
+      <th class="css01">スピリット</th>
+      <th class="css01">レイス</th>
+      <th class="css01">ファントム</th>
+    </tr>
+    <tr>
+      <th>ポルターガイスト</th>
+      <th>バンシー</th>
+      <th>ジン</th>
+    </tr>
+    <tr>
+      <th>メアー</th>
+      <th>レヴナント</th>
+      <th>シェード</th>
+    </tr>
+    <tr>
+      <th>デーモン</th>
+      <th>幽霊</th>
+      <th>鬼</th>
+    </tr>
+    <tr>
+      <th>妖怪</th>
+      <th>ハントゥ</th>
+      <th>御霊</th>
+    </tr>
+    <tr>
+      <th>マイリング</th>
+      <th>怨霊</th>
+      <th>ツインズ</th>
+    </tr>
+    <tr>
+      <th>雷獣</th>
+      <th>化け狐</th>
+      <th>ミミック</th>
+    </tr>
+    </table>
+
+
+    <table border="1" style="margin:20px auto 0px auto;text-align:center">
+    <tr>
+      <td><input type="checkbox" name="EMF" id="SPR"></td>
+      <td class="css02">スマッジで180秒間ハント無効</td>
+      <td><input type="checkbox" name="EMF" id="RIS"></td>
+      <td class="css02">足跡無し</td>
+    </tr>
+    <tr>
+			<td><input type="checkbox" name="DOT" id="FTM"></td>
+			<td>写真に映らない</td>
+			<td><input type="checkbox" name="DOT" id="PRT"></td>
+			<td>同時に複数の物を動かす</td>
+    </tr>
+    <tr>
+      <td><input type="checkbox" name="FIN" id="VNS"></td>
+      <td>特定の人以外ハントされない</td>
+      <td><input type="checkbox" name="ORB" id="JIN"></td>
+      <td>遠くで足が速い</td>
+    </tr>
+    <tr>
+      <td><input type="checkbox" name="WRI" id="MEA"></td>
+      <td>暗い場所の人を襲う</td>
+      <td><input type="checkbox" name="WRI" id="RVN"></td>
+      <td>足が速い</td>
+    </tr>
+    <tr>
+      <td><input type="checkbox" name="WRI" id="SED"></td>
+      <td>単独の人を狙ってハントする</td>
+      <td><input type="checkbox" name="SPB" id="DMN"></td>
+      <td>ウィジャ盤による正気度低下が少ない</td>
+    </tr>
+    <tr>
+      <td><input type="checkbox" name="WRI" id="YRI"></td>
+      <td>正気度に大きく影響する</td>
+      <td><input type="checkbox" name="SPB" id="ONI"></td>
+      <td>高速で物を投げ飛ばす</td>
+    </tr>
+    <tr>
+      <td><input type="checkbox" name="WRI" id="YKI"></td>
+      <td>近くの声に反応してハントとなる</td>
+      <td><input type="checkbox" name="SPB" id="HNT"></td>
+      <td>低い温度で速く、温かいと遅くなる</td>
+    </tr>
+    <tr>
+      <td><input type="checkbox" name="WRI" id="MTM"></td>
+      <td>肉眼でD.O.T.Sが見えない</td>
+      <td><input type="checkbox" name="SPB" id="MRG"></td>
+      <td>ハント時に静かになる</td>
+    </tr>
+    <tr>
+      <td><input type="checkbox" name="FRE" id="ONR"></td>
+      <td>火を消したらハントになる</td>
+      <td><input type="checkbox" name="FRE" id="TIN"></td>
+      <td>2箇所で超常現象</td>
+    </tr>
+    <tr>
+      <td><input type="checkbox" name="FRE" id="RIJ"></td>
+      <td>電子機器により加速</td>
+      <td><input type="checkbox" name="FRE" id="KTN"></td>
+      <td>指が6本</td>
+    </tr>
+    </table>
+
+		<div class="css05">
+		<input type="button" onclick="function01()" value="ジャーナル">
+		<input type="button" onclick="function02()" value="呪いのアイテム">
+		<!--<p class="css04" onclick="function01()">ジャーナル</p>
+		<p class="css04" onclick="function02()">呪いのアイテム</p>-->
+		</div>
+
+		<hr>
+
+		<div class="css05" id="item">
+		</div>
+
+		<hr>
+
+		<div class="css05" id="image">
+		</div>
+
+<script>
+  let num = 1;
+	let s_num = 1;
+	let check = 0;
+
+  let EMF_check = 0;
+  let DOT_check = 0;
+  let FIN_check = 0;
+  let ORB_check = 0;
+  let WRI_check = 0;
+  let SPB_check = 0;
+  let FRE_check = 0;
+
+  let SPR_check = 0;
+  let RIS_check = 0;
+  let FTM_check = 0;
+  let PRT_check = 0;
+  let VNS_check = 0;
+  let JIN_check = 0;
+  let MEA_check = 0;
+	let RVN_check = 0;
+  let SED_check = 0;
+  let DMN_check = 0;
+  let YRI_check = 0;
+  let ONI_check = 0;
+  let YKI_check = 0;
+  let HNT_check = 0;
+	let MTM_check = 0;
+  let MRG_check = 0;
+  let ONR_check = 0;
+  let TIN_check = 0;
+  let RIJ_check = 0;
+  let KTN_check = 0;
+	let MMK_check = 0;
+
+	function function01(){
+		let str3 = '';
+
+		str3 = str3 + '</div>';
+
+		html_str3.innerHTML = str3;
+
+		let str4 = '';
+
+		str4 = str4 + '</div>';
+
+		html_str4.innerHTML = str4;
+	}
+
+	function function02(){
+		let str3 = '';
+
+		str3 = str3 +
+		'<input type="button" class="css06" value="Tanglewood Street House" onclick="House_select(\'TSH\')"><br>'+
+		'<input type="button" class="css06" value="Edgefield Street House" onclick="House_select(\'ESH\')"><br>'+
+		'<input type="button" class="css06" value="Willow Street House" onclick="House_select(\'WSH\')"><br>'+
+		'<input type="button" class="css06" value="Ridgeview Road House" onclick="House_select(\'RRH\')"><br>'+
+		'<input type="button" class="css06" value="Bleasdale Farmhouse" onclick="House_select(\'BFH\')"><br>'+
+		'<input type="button" class="css06" value="Grafton Farmhouse" onclick="House_select(\'GFH\')"><br>'+
+		'<input type="button" class="css06" value="Brownstone High School" onclick="House_select(\'BHS\')"><br>'+
+		'<input type="button" class="css06" value="Prison" class="css04" onclick="House_select(\'PRS\')"><br>'+
+		'<input type="button" class="css06" value="Maple Lodge Campsite" onclick="House_select(\'MLC\')"><br>'+
+		'<input type="button" class="css06" value="Asylum" class="css04" onclick="House_select(\'ASL\')">';
+
+		/*'<div class="css07">'+
+		'<input type="button" class="css06" onclick="House_select(\'TSH\')" value="Tanglewood Street House">'+
+		'<input type="button" class="css06" value="Willow Street House" class="css04" onclick="House_select(\'WSH\')">'+
+		'<input type="button" class="css06" value="Bleasdale Farmhouse" class="css04" onclick="House_select(\'BFH\')">'+
+		'<input type="button" class="css06" value="Brownstone High School" class="css04" onclick="House_select(\'BHS\')">'+
+		'<input type="button" class="css06" value="Maple Lodge Campsite" class="css04" onclick="House_select(\'MLC\')">'+
+		'</div><div class="css08">'+
+		'<input type="button" class="css06" onclick="House_select(\'ESH\')" value="Edgefield Street House">'+
+		'<input type="button" class="css06" value="Ridgeview Road House" class="css04" onclick="House_select(\'RRH\')">'+
+		'<input type="button" class="css06" value="Grafton Farmhouse" class="css04" onclick="House_select(\'GFH\')">'+
+		'<input type="button" class="css06" value="Prison" class="css04" onclick="House_select(\'PRS\')">'+
+		'<input type="button" class="css06" value="Asylum" class="css04" onclick="House_select(\'ASL\')">'+
+		'</div>';*/
+
+		str3 = str3 + '</div>';
+
+		html_str3.innerHTML = str3;
+	}
+
+	let House;
+	function House_select(House){
+		let str4 = '';
+
+		if(House == 'TSH'){
+			str4 = str4 + '<img class="css07" src="img/item.png"><p>Tanglewood Street House</p><p>1F</p><img src="img/TSH_1F.png"><p>B1F</p><img src="img/TSH_B1F.png">';
+		}else if(House == 'ESH'){
+			str4 = str4 + '<img class="css07" src="img/item.png"><p>Edgefield Street House</p><p>1F</p><img src="img/ESH_1F.png"><p>2F</p><img src="img/ESH_2F.png"><p>B1F</p><img src="img/ESH_B1F.png">';
+		}else if(House == 'WSH'){
+			str4 = str4 + '<img class="css07" src="img/item.png"><p>Willow Street House</p><p>Tanglewood Street House</p><p>1F</p><img src="img/WSH_1F.png"><p>B1F</p><img src="img/WSH_B1F.png">';
+		}else if(House == 'RRH'){
+			str4 = str4 + '<img class="css07" src="img/item.png"><p>Ridgeview Road House</p><p>1F</p><img src="img/RRH_1F.png"><p>2F</p><img src="img/RRH_2F.png"><p>B1F</p><img src="img/RRH_B1F.png">';
+		}else if(House == 'BFH'){
+			str4 = str4 + '<img class="css07" src="img/item.png"><p>Bleasdale Farmhouse</p><p>1F</p><img src="img/BFH_1F.png"><p>2F</p><img src="img/BFH_2F.png"><p>3F</p><img src="img/BFH_3F.png">';
+		}else if(House == 'GFH'){
+			str4 = str4 + '<img class="css07" src="img/item.png"><p>Grafton Farmhouse</p><p>1F</p><img src="img/GFH_1F.png"><p>2F</p><img src="img/GFH_2F.png">';
+		}else if(House == 'BHS'){
+			str4 = str4 + '<img class="css07" src="img/item.png"><p>Brownstone High School</p><p>1F</p><img src="img/BHS_1F.png"><p>2F</p><img src="img/BHS_2F.png">';
+		}else if(House == 'PRS'){
+			str4 = str4 + '<img class="css07" src="img/item.png"><p>Prison</p><p>1F</p><img src="img/PRS_1F.png"><p>2F</p><img src="img/PRS_2F.png">';
+		}else if(House == 'MLC'){
+			str4 = str4 + '<img class="css07" src="img/item.png"><p>Maple Lodge Campsite</p><p>全体</p><img src="img/MLC.png"><p>1F</p><img src="img/MLC_1F.png"><p>2F</p><img src="img/MLC_2F.png">';
+		}else if(House == 'ASL'){
+			str4 = str4 + '<img class="css07" src="img/item.png"><p>Asylum</p><p>1F</p><img src="img/ASL_1F.png"><p>B1F</p><img src="img/ASL_B1F.png">';
+		}else{
+			alert('ERR');
+		}
+
+		str4 = str4 + '</div>';
+
+		html_str4.innerHTML = str4;
+	}
+
+  function valueChange(event){
+		let str2 = '';
+
+		if(CRM.checked){
+    	//EMFが選択された時の処理
+    	//msg.innerText = 'EMFレベル5:';
+      str2 = 'body{background-color:#00ff00;}';
+			check = 1;
+    }else if((!CRM.checked)){
+    	//EMFが選択解除された時の処理
+    	//msg.innerText = 'EMFレベル5が選択解除された';
+      str2 = 'body{background-color:#808080;}';
+			check = 0;
+    }
+
+  	//チェックされた時の処理
+    if(EMF.checked && EMF_check == 0){
+    	//EMFが選択された時の処理
+    	//msg.innerText = 'EMFレベル5:';
+      num = num * 2;
+      EMF_check = 1;
+    }else if((!EMF.checked) && EMF_check == 1){
+    	//EMFが選択解除された時の処理
+    	//msg.innerText = 'EMFレベル5が選択解除された';
+      num = num / 2;
+      EMF_check = 0;
+    }else if(DOT.checked && DOT_check == 0){
+      //EMFが選択された時の処理
+      //msg.innerText = 'D.O.T.S.プロジェクター:';
+      num = num * 3;
+      DOT_check = 1;
+    }else if((!DOT.checked) && DOT_check == 1){
+      //EMFが選択解除された時の処理
+      //msg.innerText = 'D.O.T.S.プロジェクターが選択解除された';
+      num = num / 3;
+      DOT_check = 0;
+    }else if(FIN.checked && FIN_check == 0){
+      //EMFが選択された時の処理
+      //msg.innerText = 'D.O.T.S.プロジェクター:';
+      num = num * 5;
+      FIN_check = 1;
+    }else if((!FIN.checked) && FIN_check == 1){
+      //EMFが選択解除された時の処理
+      //msg.innerText = 'D.O.T.S.プロジェクターが選択解除された';
+      num = num / 5;
+      FIN_check = 0;
+    }else if(ORB.checked && ORB_check == 0){
+      //EMFが選択された時の処理
+      //msg.innerText = 'D.O.T.S.プロジェクター:';
+      num = num * 7;
+      ORB_check = 1;
+    }else if((!ORB.checked) && ORB_check == 1){
+      //EMFが選択解除された時の処理
+      //msg.innerText = 'D.O.T.S.プロジェクターが選択解除された';
+      num = num / 7;
+      ORB_check = 0;
+    }else if(WRI.checked && WRI_check == 0){
+      //EMFが選択された時の処理
+      //msg.innerText = 'D.O.T.S.プロジェクター:';
+      num = num * 11;
+      WRI_check = 1;
+    }else if((!WRI.checked) && WRI_check == 1){
+      //EMFが選択解除された時の処理
+      //msg.innerText = 'D.O.T.S.プロジェクターが選択解除された';
+      num = num / 11;
+      WRI_check = 0;
+    }else if(SPB.checked && SPB_check == 0){
+      //EMFが選択された時の処理
+      //msg.innerText = 'D.O.T.S.プロジェクター:';
+      num = num * 13;
+      SPB_check = 1;
+    }else if((!SPB.checked) && SPB_check == 1){
+      //EMFが選択解除された時の処理
+      //msg.innerText = 'D.O.T.S.プロジェクターが選択解除された';
+      num = num / 13;
+      SPB_check = 0;
+    }else if(FRE.checked && FRE_check == 0){
+      //EMFが選択された時の処理
+      //msg.innerText = 'D.O.T.S.プロジェクター:';
+      num = num * 17;
+      FRE_check = 1;
+    }else if((!FRE.checked) && FRE_check == 1){
+      //EMFが選択解除された時の処理
+      //msg.innerText = 'D.O.T.S.プロジェクターが選択解除された';
+      num = num / 17;
+      FRE_check = 0;
+    }
+
+		if(SPR.checked && SPR_check == 0){
+    	//EMFが選択された時の処理
+    	//msg.innerText = 'EMFレベル5:';
+      s_num = s_num * 286;
+      SPR_check = 1;
+    }else if((!SPR.checked) && SPR_check == 1){
+    	//EMFが選択解除された時の処理
+    	//msg.innerText = 'EMFレベル5が選択解除された';
+      s_num = s_num / 286;
+      SPR_check = 0;
+    }else if(RIS.checked && RIS_check == 0){
+    	//EMFが選択された時の処理
+    	//msg.innerText = 'EMFレベル5:';
+      s_num = s_num * 78;
+      RIS_check = 1;
+    }else if((!RIS.checked) && RIS_check == 1){
+    	//EMFが選択解除された時の処理
+    	//msg.innerText = 'EMFレベル5が選択解除された';
+      s_num = s_num / 78;
+      RIS_check = 0;
+    }else if(FTM.checked && FTM_check == 0){
+    	//EMFが選択された時の処理
+    	//msg.innerText = 'EMFレベル5:';
+      s_num = s_num * 195;
+      FTM_check = 1;
+    }else if((!FTM.checked) && FTM_check == 1){
+    	//EMFが選択解除された時の処理
+    	//msg.innerText = 'EMFレベル5が選択解除された';
+      s_num = s_num / 195;
+      FTM_check = 0;
+    }else if(PRT.checked && PRT_check == 0){
+    	//EMFが選択された時の処理
+    	//msg.innerText = 'EMFレベル5:';
+      s_num = s_num * 715;
+      PRT_check = 1;
+    }else if((!PRT.checked) && PRT_check == 1){
+    	//EMFが選択解除された時の処理
+    	//msg.innerText = 'EMFレベル5が選択解除された';
+      s_num = s_num / 715;
+      PRT_check = 0;
+    }else if(VNS.checked && VNS_check == 0){
+    	//EMFが選択された時の処理
+    	//msg.innerText = 'EMFレベル5:';
+      s_num = s_num * 105;
+      VNS_check = 1;
+    }else if((!VNS.checked) && VNS_check == 1){
+    	//EMFが選択解除された時の処理
+    	//msg.innerText = 'EMFレベル5が選択解除された';
+      s_num = s_num / 105;
+      VNS_check = 0;
+    }else if(JIN.checked && JIN_check == 0){
+    	//EMFが選択された時の処理
+    	//msg.innerText = 'EMFレベル5:';
+      s_num = s_num * 170;
+      JIN_check = 1;
+    }else if((!JIN.checked) && JIN_check == 1){
+    	//EMFが選択解除された時の処理
+    	//msg.innerText = 'EMFレベル5が選択解除された';
+      s_num = s_num / 170;
+      JIN_check = 0;
+    }else if(MEA.checked && MEA_check == 0){
+    	//EMFが選択された時の処理
+    	//msg.innerText = 'EMFレベル5:';
+      s_num = s_num * 1001;
+      MEA_check = 1;
+    }else if((!MEA.checked) && MEA_check == 1){
+    	//EMFが選択解除された時の処理
+    	//msg.innerText = 'EMFレベル5が選択解除された';
+      s_num = s_num / 1001;
+      MEA_check = 0;
+    }else if(RVN.checked && RVN_check == 0){
+    	//EMFが選択された時の処理
+    	//msg.innerText = 'EMFレベル5:';
+      s_num = s_num * 1309;
+      RVN_check = 1;
+    }else if((!RVN.checked) && RVN_check == 1){
+    	//EMFが選択解除された時の処理
+    	//msg.innerText = 'EMFレベル5が選択解除された';
+      s_num = s_num / 1309;
+      RVN_check = 0;
+    }else if(SED.checked && SED_check == 0){
+    	//EMFが選択された時の処理
+    	//msg.innerText = 'EMFレベル5:';
+      s_num = s_num * 374;
+      SED_check = 1;
+    }else if((!SED.checked) && SED_check == 1){
+    	//EMFが選択解除された時の処理
+    	//msg.innerText = 'EMFレベル5が選択解除された';
+      s_num = s_num / 374;
+      SED_check = 0;
+    }else if(DMN.checked && DMN_check == 0){
+    	//EMFが選択された時の処理
+    	//msg.innerText = 'EMFレベル5:';
+      s_num = s_num * 935;
+      DMN_check = 1;
+    }else if((!DMN.checked) && DMN_check == 1){
+    	//EMFが選択解除された時の処理
+    	//msg.innerText = 'EMFレベル5が選択解除された';
+      s_num = s_num / 935;
+      DMN_check = 0;
+    }else if(YRI.checked && YRI_check == 0){
+    	//EMFが選択された時の処理
+    	//msg.innerText = 'EMFレベル5:';
+      s_num = s_num * 357;
+      YRI_check = 1;
+    }else if((!YRI.checked) && YRI_check == 1){
+    	//EMFが選択解除された時の処理
+    	//msg.innerText = 'EMFレベル5が選択解除された';
+      s_num = s_num / 357;
+      YRI_check = 0;
+    }else if(ONI.checked && ONI_check == 0){
+    	//EMFが選択された時の処理
+    	//msg.innerText = 'EMFレベル5:';
+      s_num = s_num * 102;
+      ONI_check = 1;
+    }else if((!ONI.checked) && ONI_check == 1){
+    	//EMFが選択解除された時の処理
+    	//msg.innerText = 'EMFレベル5が選択解除された';
+      s_num = s_num / 102;
+      ONI_check = 0;
+    }else if(YKI.checked && YKI_check == 0){
+    	//EMFが選択された時の処理
+    	//msg.innerText = 'EMFレベル5:';
+      s_num = s_num * 273;
+      YKI_check = 1;
+    }else if((!YKI.checked) && YKI_check == 1){
+    	//EMFが選択解除された時の処理
+    	//msg.innerText = 'EMFレベル5が選択解除された';
+      s_num = s_num / 273;
+      YKI_check = 0;
+    }else if(HNT.checked && HNT_check == 0){
+    	//EMFが選択された時の処理
+    	//msg.innerText = 'EMFレベル5:';
+      s_num = s_num * 595;
+      HNT_check = 1;
+    }else if((!HNT.checked) && HNT_check == 1){
+    	//EMFが選択解除された時の処理
+    	//msg.innerText = 'EMFレベル5が選択解除された';
+      s_num = s_num / 595;
+      HNT_check = 0;
+    }else if(MTM.checked && MTM_check == 0){
+    	//EMFが選択された時の処理
+    	//msg.innerText = 'EMFレベル5:';
+      s_num = s_num * 30;
+      MTM_check = 1;
+    }else if((!MTM.checked) && MTM_check == 1){
+    	//EMFが選択解除された時の処理
+    	//msg.innerText = 'EMFレベル5が選択解除された';
+      s_num = s_num / 30;
+      MTM_check = 0;
+    }else if(MRG.checked && MRG_check == 0){
+    	//EMFが選択された時の処理
+    	//msg.innerText = 'EMFレベル5:';
+      s_num = s_num * 110;
+      MRG_check = 1;
+    }else if((!MRG.checked) && MRG_check == 1){
+    	//EMFが選択解除された時の処理
+    	//msg.innerText = 'EMFレベル5が選択解除された';
+      s_num = s_num / 110;
+      MRG_check = 0;
+    }else if(ONR.checked && ONR_check == 0){
+    	//EMFが選択された時の処理
+    	//msg.innerText = 'EMFレベル5:';
+      s_num = s_num * 1547;
+      ONR_check = 1;
+    }else if((!ONR.checked) && ONR_check == 1){
+    	//EMFが選択解除された時の処理
+    	//msg.innerText = 'EMFレベル5が選択解除された';
+      s_num = s_num / 1547;
+      ONR_check = 0;
+    }else if(TIN.checked && TIN_check == 0){
+    	//EMFが選択された時の処理
+    	//msg.innerText = 'EMFレベル5:';
+      s_num = s_num * 442;
+      TIN_check = 1;
+    }else if((!TIN.checked) && TIN_check == 1){
+    	//EMFが選択解除された時の処理
+    	//msg.innerText = 'EMFレベル5が選択解除された';
+      s_num = s_num / 442;
+      TIN_check = 0;
+    }else if(RIJ.checked && RIJ_check == 0){
+    	//EMFが選択された時の処理
+    	//msg.innerText = 'EMFレベル5:';
+      s_num = s_num * 42;
+      RIJ_check = 1;
+    }else if((!RIJ.checked) && RIJ_check == 1){
+    	//EMFが選択解除された時の処理
+    	//msg.innerText = 'EMFレベル5が選択解除された';
+      s_num = s_num / 42;
+      RIJ_check = 0;
+    }else if(KTN.checked && KTN_check == 0){
+    	//EMFが選択された時の処理
+    	//msg.innerText = 'EMFレベル5:';
+      s_num = s_num * 70;
+      KTN_check = 1;
+    }else if((!KTN.checked) && KTN_check == 1){
+    	//EMFが選択解除された時の処理
+    	//msg.innerText = 'EMFレベル5が選択解除された';
+      s_num = s_num / 70;
+      KTN_check = 0;
+    }
+
+    //msg.innerText = num;
+
+		let str = '<table border="1" style="margin:50px 0px 0px 0px" id="table"><tr>';
+
+		if( (286 / num == 1 && 286 % num == 0) || (286 / s_num == 1 && 286 % s_num == 0) ){
+			//if( (EMF、ライティング、スピボの時) || (スピリットの特徴の時) )
+			str = str + '<th class="css01" id="blue">スピリット</th>';
+		}else if(286 % num != 0){
+			str = str + '<th class="css01" id="black">スピリット</th>';
+		}else{
+			str = str + '<th class="css01">スピリット</th>';
+		}
+
+		if( (78 / num == 1 && 78 % num == 0) || (78 / s_num == 1 && 78 % s_num == 0) ){
+			//if( (EMF、DOTS、スピボの時) || (レイスの特徴の時) )
+			str = str + '<th class="css01" id="blue">レイス</th>';
+		}else if(78 % num != 0){
+			str = str + '<th class="css01" id="black">レイス</th>';
+		}else{
+			str = str + '<th class="css01">レイス</th>';
+		}
+
+		if( (195 / num == 1 && 195 % num == 0) || (195 / s_num == 1 && 195 % s_num == 0) ){
+			//if( (DOTS、指紋、スピボの時) || (ファントムの特徴の時) )
+			str = str + '<th class="css01" id="blue">ファントム</th>';
+		}else if(195 % num != 0){
+			str = str + '<th class="css01" id="black">ファントム</th>';
+		}else{
+			str = str + '<th class="css01">ファントム</th>';
+		}
+
+		str = str + '</tr><tr>';
+
+		if( (715 / num == 1 && 715 % num == 0) || (715 / s_num == 1 && 715 % s_num == 0) ){
+			//if( (指紋、ライティング、スピボの時) || (ポルタ―ガイストの特徴の時) )
+			str = str + '<th id="blue">ポルターガイスト</th>';
+		}else if(715 % num != 0){
+			str = str + '<th id="black">ポルターガイスト</th>';
+		}else{
+			str = str + '<th>ポルターガイスト</th>';
+		}
+
+		if( (105 / num == 1 && 105 % num == 0) || (105 / s_num == 1 && 105 % s_num == 0) ){
+			//if( (DOTS、指紋、オーブの時) || (バンシーの特徴の時) )
+			str = str + '<th id="blue">バンシー</th>';
+		}else if(105 % num != 0){
+			str = str + '<th id="black">バンシー</th>';
+		}else{
+			str = str + '<th>バンシー</th>';
+		}
+
+		if( (170 / num == 1 && 170 % num == 0) || (170 / s_num == 1 && 170 % s_num == 0) ){
+			//if( (EMF、指紋、氷点下の時) || (ジンの特徴の時) )
+			str = str + '<th id="blue">ジン</th>';
+		}else if(170 % num != 0){
+			str = str + '<th id="black">ジン</th>';
+		}else{
+			str = str + '<th>ジン</th>';
+		}
+
+		str = str + '</tr><tr>';
+
+		if( (1001 / num == 1 && 1001 % num == 0) || (1001 / s_num == 1 && 1001 % s_num == 0) ){
+			//if( (オーブ、ライティング、スピボの時) || (メアーの特徴の時) )
+			str = str + '<th id="blue">メアー</th>';
+		}else if(1001 % num != 0){
+			str = str + '<th id="black">メアー</th>';
+		}else{
+			str = str + '<th>メアー</th>';
+		}
+
+		if( (1309 / num == 1 && 1309 % num == 0) || (1309 / s_num == 1 && 1309 % s_num == 0) ){
+			//if( (オーブ、ライティング、氷点下の時) || (レヴナントの特徴の時) )
+			str = str + '<th id="blue">レヴナント</th>';
+		}else if(1309 % num != 0){
+			str = str + '<th id="black">レヴナント</th>';
+		}else{
+			str = str + '<th>レヴナント</th>';
+		}
+
+		if( (374 / num == 1 && 374 % num == 0) || (374 / s_num == 1 && 374 % s_num == 0) ){
+			//if( (EMF、ライティング、氷点下の時) || (シェードの特徴の時) )
+			str = str + '<th id="blue">シェード</th>';
+		}else if(374 % num != 0){
+			str = str + '<th id="black">シェード</th>';
+		}else{
+			str = str + '<th>シェード</th>';
+		}
+
+		str = str + '</tr><tr>';
+
+		if( (935 / num == 1 && 935 % num == 0) || (935 / s_num == 1 && 935 % s_num == 0) ){
+			//if( (指紋、ライティング、氷点下の時) || (デーモンの特徴の時) )
+			str = str + '<th id="blue">デーモン</th>';
+		}else if(935 % num != 0){
+			str = str + '<th id="black">デーモン</th>';
+		}else{
+			str = str + '<th>デーモン</th>';
+		}
+
+		if( (357 / num == 1 && 357 % num == 0) || (357 / s_num == 1 && 357 % s_num == 0) ){
+			//if( (DOTS、オーブ、氷点下の時) || (幽霊の特徴の時) )
+			str = str + '<th id="blue">幽霊</th>';
+		}else if(357 % num != 0){
+			str = str + '<th id="black">幽霊</th>';
+		}else{
+			str = str + '<th>幽霊</th>';
+		}
+
+		if( (102 / num == 1 && 102 % num == 0) || (102 / s_num == 1 && 102 % s_num == 0) ){
+			//if( (EMF、DOTS、氷点下の時) || (鬼の特徴の時) )
+			str = str + '<th id="blue">鬼</th>';
+		}else if(102 % num != 0){
+			str = str + '<th id="black">鬼</th>';
+		}else{
+			str = str + '<th>鬼</th>';
+		}
+
+		str = str + '</tr><tr>';
+
+		if( (273 / num == 1 && 273 % num == 0) || (273 / s_num == 1 && 273 % s_num == 0) ){
+			//if( (DOTS、オーブ、スピボの時) || (妖怪の特徴の時) )
+			str = str + '<th id="blue">妖怪</th>';
+		}else if(273 % num != 0){
+			str = str + '<th id="black">妖怪</th>';
+		}else{
+			str = str + '<th>妖怪</th>';
+		}
+
+		if( /* (595 / num == 1 && 595 % num == 0) || */ (595 / s_num == 1 && 595 % s_num == 0) ){
+			//if( (指紋、オーブ、氷点下の時) || (ハントゥの特徴の時) )
+			str = str + '<th id="blue">ハントゥ</th>';
+		}else if(595 % num != 0){
+			str = str + '<th id="black">ハントゥ</th>';
+		}else{
+			str = str + '<th>ハントゥ</th>';
+		}
+
+		if( (30 / num == 1 && 30 % num == 0) || (30 / s_num == 1 && 30 % s_num == 0) ){
+			//if( (EMF、DOTS、指紋の時) || (御霊の特徴の時) )
+			str = str + '<th id="blue">御霊</th>';
+		}else if(30 % num != 0){
+			str = str + '<th id="black">御霊</th>';
+		}else{
+			str = str + '<th>御霊</th>';
+		}
+
+		str = str + '</tr><tr>';
+
+		if( (110 / num == 1 && 110 % num == 0) || (110 / s_num == 1 && 110 % s_num == 0) ){
+			//if( (EMF、指紋、ライティングの時) || (マイリングの特徴の時) )
+			str = str + '<th id="blue">マイリング</th>';
+		}else if(110 % num != 0){
+			str = str + '<th id="black">マイリング</th>';
+		}else{
+			str = str + '<th>マイリング</th>';
+		}
+
+		if( /* (1547 / num == 1 && 1547 % num == 0) || */ (1547 / s_num == 1 && 1547 % s_num == 0) ){
+			//if( (オーブ、スピボ、氷点下の時) || (怨霊の特徴の時) )
+			str = str + '<th id="blue">怨霊</th>';
+		}else if(1547 % num != 0){
+			str = str + '<th id="black">怨霊</th>';
+		}else{
+			str = str + '<th>怨霊</th>';
+		}
+
+		if( (442 / num == 1 && 442 % num == 0) || (442 / s_num == 1 && 442 % s_num == 0) ){
+			//if( (EMF、スピボ、氷点下の時) || (ツインズの特徴の時) )
+			str = str + '<th id="blue">ツインズ</th>';
+		}else if(442 % num != 0){
+			str = str + '<th id="black">ツインズ</th>';
+		}else{
+			str = str + '<th>ツインズ</th>';
+		}
+
+		str = str + '</tr><tr>';
+
+		if( (42 / num == 1 && 42 % num == 0) || (42 / s_num == 1 && 42 % s_num == 0) ){
+			//if( (EMF、DOTS、オーブの時) || (雷獣の特徴の時) )
+			str = str + '<th id="blue">雷獣</th>';
+		}else if(42 % num != 0){
+			str = str + '<th id="black">雷獣</th>';
+		}else{
+			str = str + '<th>雷獣</th>';
+		}
+
+		if( (70 / num == 1 && 70 % num == 0) || (70 / s_num == 1 && 70 % s_num == 0) ){
+			//if( (EMF、指紋、オーブの時) || (化け狐の特徴の時) )
+			str = str + '<th id="blue">化け狐</th>';
+		}else if(70 % num != 0){
+			str = str + '<th id="black">化け狐</th>';
+		}else{
+			str = str + '<th>化け狐</th>';
+		}
+
+		if( (7735 / num == 1 && 7735 % num == 0) || (7735 / s_num == 1 && 7735 % s_num == 0) || (1105 / num == 1 && 1105 % num == 0) ){
+			//if( (指紋、オーブ、スピボ、氷点下の時) || (ミミックの特徴の時) || (指紋。スピボ、氷点下の時) )
+			str = str + '<th id="blue">ミミック</th>';
+		}else if( (7735 % num != 0) || (7735 / s_num == 1 && 7735 % s_num == 0) ){
+			str = str + '<th id="black">ミミック</th>';
+		}else{
+			str = str + '<th>ミミック</th>';
+		}
+
+		str = str + '</tr></table>';
+
+		html_str.innerHTML = str;
+		html_str2.innerHTML = str2;
+  }
+
+  let EMF = document.getElementById('EMF');
+  EMF.addEventListener('change',valueChange);
+  let DOT = document.getElementById('DOT');
+  DOT.addEventListener('change',valueChange);
+  let FIN = document.getElementById('FIN');
+  FIN.addEventListener('change',valueChange);
+  let ORB = document.getElementById('ORB');
+  ORB.addEventListener('change',valueChange);
+  let WRI = document.getElementById('WRI');
+  WRI.addEventListener('change',valueChange);
+  let SPB = document.getElementById('SPB');
+  SPB.addEventListener('change',valueChange);
+  let FRE = document.getElementById('FRE');
+  FRE.addEventListener('change',valueChange);
+
+	let SPR = document.getElementById('SPR');
+  SPR.addEventListener('change',valueChange);
+  let RIS = document.getElementById('RIS');
+  RIS.addEventListener('change',valueChange);
+  let FTM = document.getElementById('FTM');
+  FTM.addEventListener('change',valueChange);
+  let PRT = document.getElementById('PRT');
+  PRT.addEventListener('change',valueChange);
+  let VNS = document.getElementById('VNS');
+  VNS.addEventListener('change',valueChange);
+  let JIN = document.getElementById('JIN');
+  JIN.addEventListener('change',valueChange);
+  let MEA = document.getElementById('MEA');
+  MEA.addEventListener('change',valueChange);
+	let RVN = document.getElementById('RVN');
+  RVN.addEventListener('change',valueChange);
+  let SED = document.getElementById('SED');
+  SED.addEventListener('change',valueChange);
+  let DMN = document.getElementById('DMN');
+  DMN.addEventListener('change',valueChange);
+  let YRI = document.getElementById('YRI');
+  YRI.addEventListener('change',valueChange);
+  let ONI = document.getElementById('ONI');
+  ONI.addEventListener('change',valueChange);
+  let YKI = document.getElementById('YKI');
+  YKI.addEventListener('change',valueChange);
+  let HNT = document.getElementById('HNT');
+  HNT.addEventListener('change',valueChange);
+  let MTM = document.getElementById('MTM');
+  MTM.addEventListener('change',valueChange);
+  let MRG = document.getElementById('MRG');
+  MRG.addEventListener('change',valueChange);
+  let ONR = document.getElementById('ONR');
+  ONR.addEventListener('change',valueChange);
+  let TIN = document.getElementById('TIN');
+  TIN.addEventListener('change',valueChange);
+  let RIJ = document.getElementById('RIJ');
+  RIJ.addEventListener('change',valueChange);
+  let KTN = document.getElementById('KTN');
+  KTN.addEventListener('change',valueChange);
+
+	let CRM = document.getElementById('CRM');
+  CRM.addEventListener('change',valueChange);
+
+	let html_str = document.getElementById('table');
+	let html_str2 = document.getElementById('style');
+	let html_str3 = document.getElementById('item');
+	let html_str4 = document.getElementById('image');
+
+  //let msg = document.getElementById('msg');
+</script>
+
+  </body>
+</html>
